@@ -1,9 +1,10 @@
-package com.app.ecom;
+package com.app.ecom.service;
 
+import com.app.ecom.repository.UserRepository;
+import com.app.ecom.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +12,7 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    private UserRepository  userRepository;
+    private UserRepository userRepository;
 
     public List<User> fetchAllUsers(){
         return userRepository.findAll();
