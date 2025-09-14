@@ -17,7 +17,7 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
-
+    //adding to cart
     @PostMapping
     public ResponseEntity<String> addToCart(
             @RequestHeader("X-User-ID") String userId,
@@ -27,6 +27,7 @@ public class CartController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+    //deleting form cart
     @DeleteMapping("/items/{productId}")
     public ResponseEntity<Void> removeFromCart(
             @RequestHeader("X-User-ID") String userId,
@@ -34,5 +35,11 @@ public class CartController {
         boolean deleted = cartService.deleteItemFromCart(userId, productId);
         return deleted ? ResponseEntity.noContent().build()
                 : ResponseEntity.notFound().build();
+    }
+    //fetching cart
+    @GetMapping
+    public ResponseEntity<List<CartItem>> getCart(
+            @RequestHeader("X-User-ID") String userId){
+        return ResponseEntity.ok(cartService.getCart(userId));
     }
 }
