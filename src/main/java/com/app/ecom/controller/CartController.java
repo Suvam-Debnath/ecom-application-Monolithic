@@ -3,6 +3,7 @@ package com.app.ecom.controller;
 import com.app.ecom.dto.CartItemRequest;
 import com.app.ecom.model.CartItem;
 import com.app.ecom.service.CartService;
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,5 +27,12 @@ public class CartController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
+    @DeleteMapping("/items/{productId}")
+    public ResponseEntity<Void> removeFromCart(
+            @RequestHeader("X-User-ID") String userId,
+            @PathVariable Long productId){
+        boolean deleted = cartService.deleteItemFromCart(userId, productId);
+        return deleted ? ResponseEntity.noContent().build()
+                : ResponseEntity.notFound().build();
+    }
 }
