@@ -20,12 +20,12 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String discription;
+    private String description;
     private BigDecimal price;
     private Integer stockQuantity;
     private String category;
     private String imageUrl;
-    private  boolean active = true;
+    private Boolean active = true;
 
     @CreationTimestamp
     private LocalDateTime createAt;
